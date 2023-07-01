@@ -1,0 +1,20 @@
+{
+  "name": "giglogistics-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/vicktor349/giglogistics-server.git",
+  "author": "layomi",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.22",
+    "touch-cli": "^0.0.1"
+  }
+}
