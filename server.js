@@ -4,6 +4,7 @@ require('dotenv').config()
 const connectDB = require('./config/db')
 connectDB()
 app.use(express.json())
+const verifyToken = require('./util/verifyToken')
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -12,6 +13,9 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api/auth', require('./auth/route'))
+app.use('./package.json', verifyToken, (req, res) => {
+    res.send('<h1>Hello</h1>')
+})
 
 
 
