@@ -34,7 +34,7 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
-    if (!user) res.status(400).json({ msg: "Invalid Credentials" })
+    if (!user) res.status(400).json({ msg: "Invalid email or Password" })
     const dbPassword = user.password
     await bcrypt.compare(password, dbPassword).then((match) => {
         if (!match) {
