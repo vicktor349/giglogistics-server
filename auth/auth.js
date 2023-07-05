@@ -1,11 +1,7 @@
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.JWT_SECRET
 const createToken = require('../util/createToken')
 
-// JWT LIFESPAN 
-const maxAge = 24 * 60 * 60 * 1000
 
 // SIGNUP LOGIC
 exports.signup = async (req, res) => {
@@ -25,14 +21,9 @@ exports.signup = async (req, res) => {
             password: hashedPassword,
         }).then((user) => {
             const accessToken = createToken(user)
-            res.cookie("jwtToken", accessToken, {
-                httpOnly: true,
-                secure: true,
-                maxAge: maxAge
-            })
             return res.status(200).json({
                 message: "User successfully created",
-                user: user._id,
+                token: accessToken
             })
         }
 
@@ -55,12 +46,7 @@ exports.signin = async (req, res) => {
     await bcrypt.compare(password, dbPassword).then((match) => {
         if (match) {
             const accessToken = createToken(user)
-            res.cookie("jwtToken", accessToken, {
-                secure: true,
-                httpOnly: true,
-                maxAge: maxAge
-            })
-            return res.status(200).json({ msg: "Logged In Successfully!", user: user._id })
+            return res.status(200).json({ msg: "Logged In Successfully!", token: accessToken })
         } else {
             return res.status(400).json({ msg: "Invalid email or Password" })
         }
