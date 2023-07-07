@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 require('dotenv').config()
 const connectDB = require('./config/db')
-connectDB()
-app.use(express.json())
 const verifyToken = require('./util/verifyToken')
+app.use(express.json())
+app.use(cors())
+connectDB()
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
