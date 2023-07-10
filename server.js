@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api/auth', require('./auth/route'))
-app.use('./package.json', verifyToken, (req, res) => {
+app.use(verifyToken, (req, res) => {
     res.send('<h1>Hello</h1>')
 })
 
