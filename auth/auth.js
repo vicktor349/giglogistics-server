@@ -52,3 +52,21 @@ exports.signin = async (req, res) => {
         }
     })
 }
+
+
+// GET USERS
+exports.getUsers = async (req, res, next) => {
+    await User.find({})
+        .then(users => {
+            const userFunction = users.map(user => {
+                const container = {}
+                container.email = user.email
+                return container
+            })
+            res.status(200).json({ user: userFunction })
+            console.log(userFunction)
+        })
+        .catch(err =>
+            res.status(401).json({ message: "Not successful", error: err.message })
+        )
+}
