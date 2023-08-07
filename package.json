@@ -15,8 +15,11 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.3.1",
+    "mongoose": "^7.4.2",
     "nodemon": "^2.0.22",
     "touch-cli": "^0.0.1"
+  },
+  "engines": {
+    "node": ">=14.20.1"
   }
 }
