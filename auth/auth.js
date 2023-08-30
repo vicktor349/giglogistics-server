@@ -46,7 +46,7 @@ exports.signin = async (req, res) => {
     await bcrypt.compare(password, dbPassword).then((match) => {
         if (match) {
             const accessToken = createToken(user)
-            return res.status(200).json({ msg: "Logged In Successfully!", token: accessToken })
+            return res.status(200).json({ msg: "Logged In Successfully!", token: accessToken, user: user._id })
         } else {
             return res.status(400).json({ msg: "Invalid email or Password" })
         }
